@@ -3,6 +3,8 @@ A [MagicMirror²](https://github.com/MichMich/MagicMirror) module that shows For
 
 The stats are fetched from [this API](https://fortniteapi.com) (which seem to bit unstable at times).
 
+![screenshot](https://user-images.githubusercontent.com/25268023/57136270-91d57a00-6dac-11e9-8364-f3d2224688c8.png)
+
 # Installation
 1. Clone repo:
 ```
