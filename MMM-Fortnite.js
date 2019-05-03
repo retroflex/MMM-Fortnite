@@ -38,10 +38,19 @@ Module.register('MMM-Fortnite', {
 			if (null == payload)
 				return;
 
-			if (0 === payload.length)
+			if (null == payload.identifier)
 				return;
 
-			this.stats = payload;
+			if (payload.identifier !== this.identifier)  // To make sure the correct instance is updated, since they share node_helper.
+				return;
+
+			if (null == payload.stats)
+				return;
+
+			if (0 === payload.stats.length)
+				return;
+
+			this.stats = payload.stats;
 			this.updateDom(0);
 		}
 	},
@@ -86,7 +95,8 @@ Module.register('MMM-Fortnite', {
 		this.stats = null;
 
 		// Tell node_helper to load stats at startup.
-		this.sendSocketNotification('GET_STATS', { userIDs: this.config.userIDs,
+		this.sendSocketNotification('GET_STATS', { identifier: this.identifier,
+		                                           userIDs: this.config.userIDs,
 		                                           includeDefaultGameModes: this.config.includeDefaultGameModes,
 		                                           includeLimitedTimeGameModes: this.config.includeLimitedTimeGameModes,
 		                                           includeLargeTeamGameModes: this.config.includeLargeTeamGameModes });
@@ -95,7 +105,8 @@ Module.register('MMM-Fortnite', {
 		let interval = Math.max(this.config.fetchInterval, 1000);  // In millisecs. < 1 min not allowed.
 		let self = this;
 		setInterval(function() {
-			self.sendSocketNotification('GET_STATS', { userIDs: self.config.userIDs,
+			self.sendSocketNotification('GET_STATS', { identifier: self.identifier,
+			                                           userIDs: self.config.userIDs,
 			                                           includeDefaultGameModes: self.config.includeDefaultGameModes,
 			                                           includeLimitedTimeGameModes: self.config.includeLimitedTimeGameModes,
 			                                           includeLargeTeamGameModes: self.config.includeLargeTeamGameModes });

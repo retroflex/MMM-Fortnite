@@ -66,6 +66,7 @@ module.exports = NodeHelper.create({
 	// The array is then sent to the client (to MMM-Fortnite.js).
 	// @param userIDs - String array of user ID's.
 	getStats: function(payload) {
+		let identifier = payload.identifier;
 		let userIDs = payload.userIDs;
 
 		let promises = [];
@@ -88,7 +89,7 @@ module.exports = NodeHelper.create({
 
 			stats.sort((a, b) => Number(b.score) - Number(a.score));  // Sort users by score.
 
-			this.sendSocketNotification('STATS_RESULT', stats);
+			this.sendSocketNotification('STATS_RESULT', {identifier: identifier, stats: stats} );
 		}).catch(err => {
 			console.log(this.name + ' error when fetching data: ' + err);
 		});
