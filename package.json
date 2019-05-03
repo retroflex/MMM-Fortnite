@@ -18,6 +18,6 @@
 		"url": "https://github.com/retroflex/MMM-Fortnite"
 	},
 	"dependencies": {
-		"request-promise": "^4.2.4",
+		"request-promise": "^4.2.4"
 	}
 }
