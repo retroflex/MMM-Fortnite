@@ -21,30 +21,36 @@ module.exports = NodeHelper.create({
 	//   json.overallData.largeTeamModes.score / .matchesPlayed / .kills
 	// @param json - The full JSON for the user.
 	// @return Object with stats we want to show.
-	extractStats: function(json) {
+	extractStats: function(json, includeDefaultGameModes, includeLimitedTimeGameModes, includeLargeTeamGameModes) {
 		let totalScore = 0;
 		let totalMatchesPlayed = 0;
 		let totalKills = 0;
 
-		const defaultModes = json.overallData.defaultModes;
-		if (defaultModes != null) {
-			if (defaultModes.score         != null)  totalScore         += defaultModes.score;
-			if (defaultModes.matchesplayed != null)  totalMatchesPlayed += defaultModes.matchesplayed;
-			if (defaultModes.kills         != null)  totalKills         += defaultModes.kills;
+		if (includeDefaultGameModes) {
+			const defaultModes = json.overallData.defaultModes;
+			if (defaultModes != null) {
+				if (defaultModes.score         != null)  totalScore         += defaultModes.score;
+				if (defaultModes.matchesplayed != null)  totalMatchesPlayed += defaultModes.matchesplayed;
+				if (defaultModes.kills         != null)  totalKills         += defaultModes.kills;
+			}
 		}
 
-		const ltmModes = json.overallData.ltmModes;
-		if (ltmModes != null) {
-			if (ltmModes.score         != null)  totalScore         += ltmModes.score;
-			if (ltmModes.matchesplayed != null)  totalMatchesPlayed += ltmModes.matchesplayed;
-			if (ltmModes.kills         != null)  totalKills         += ltmModes.kills;
+		if (includeLimitedTimeGameModes) {
+			const limitedTimeModes = json.overallData.ltmModes;
+			if (limitedTimeModes != null) {
+				if (limitedTimeModes.score         != null)  totalScore         += limitedTimeModes.score;
+				if (limitedTimeModes.matchesplayed != null)  totalMatchesPlayed += limitedTimeModes.matchesplayed;
+				if (limitedTimeModes.kills         != null)  totalKills         += limitedTimeModes.kills;
+			}
 		}
 
-		const largeTeamModes = json.overallData.largeTeamModes;
-		if (largeTeamModes != null) {
-			if (largeTeamModes.score         != null)  totalScore         += largeTeamModes.score;
-			if (largeTeamModes.matchesplayed != null)  totalMatchesPlayed += largeTeamModes.matchesplayed;
-			if (largeTeamModes.kills         != null)  totalKills         += largeTeamModes.kills;
+		if (includeLargeTeamGameModes) {
+			const largeTeamModes = json.overallData.largeTeamModes;
+			if (largeTeamModes != null) {
+				if (largeTeamModes.score         != null)  totalScore         += largeTeamModes.score;
+				if (largeTeamModes.matchesplayed != null)  totalMatchesPlayed += largeTeamModes.matchesplayed;
+				if (largeTeamModes.kills         != null)  totalKills         += largeTeamModes.kills;
+			}
 		}
 
 		const stats = { userName: json.epicName,
@@ -59,10 +65,11 @@ module.exports = NodeHelper.create({
 	// The stats are the total for all seasons and all game modes.
 	// The array is then sent to the client (to MMM-Fortnite.js).
 	// @param userIDs - String array of user ID's.
-	getStats: function(userIDs) {
+	getStats: function(payload) {
+		let userIDs = payload.userIDs;
+
 		let promises = [];
-		for (let i = 0; i < userIDs.length; ++i)
-		{
+		for (let i = 0; i < userIDs.length; ++i) {
 			const userURL = baseURL + userIDs[i];
 			const options = {uri: userURL};
 			promises.push(rp(options));
@@ -75,7 +82,7 @@ module.exports = NodeHelper.create({
 				const content = contents[i];
 				const json = JSON.parse(content);
 				
-				const stat = this.extractStats(json);
+				const stat = this.extractStats(json, payload.includeDefaultGameModes, payload.includeLimitedTimeGameModes, payload.includeLargeTeamGameModes);
 				stats.push(stat);
 			}
 

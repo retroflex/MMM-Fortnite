@@ -11,6 +11,9 @@ Module.register('MMM-Fortnite', {
 		showScore: true,
 		showMatchesPlayed: true,
 		showKills: true,
+		includeDefaultGameModes: true,
+		includeLimitedTimeGameModes: true,
+		includeLargeTeamGameModes: false,
 		userIDs: [ '4735ce9132924caf8a5b17789b40f79c' ],  // Ninja.
 		fetchInterval: 60 * 1000  // In millisecs. Default each minute.
 	},
@@ -83,14 +86,19 @@ Module.register('MMM-Fortnite', {
 		this.stats = null;
 
 		// Tell node_helper to load stats at startup.
-		this.sendSocketNotification('GET_STATS', this.config.userIDs);
+		this.sendSocketNotification('GET_STATS', { userIDs: this.config.userIDs,
+		                                           includeDefaultGameModes: this.config.includeDefaultGameModes,
+		                                           includeLimitedTimeGameModes: this.config.includeLimitedTimeGameModes,
+		                                           includeLargeTeamGameModes: this.config.includeLargeTeamGameModes });
 
 		// Make sure stats are reloaded at user specified interval.
 		let interval = Math.max(this.config.fetchInterval, 1000);  // In millisecs. < 1 min not allowed.
 		let self = this;
 		setInterval(function() {
-			console.log('fortnite GET_STATS');
-			self.sendSocketNotification('GET_STATS', self.config.userIDs);
+			self.sendSocketNotification('GET_STATS', { userIDs: self.config.userIDs,
+			                                           includeDefaultGameModes: self.config.includeDefaultGameModes,
+			                                           includeLimitedTimeGameModes: self.config.includeLimitedTimeGameModes,
+			                                           includeLargeTeamGameModes: self.config.includeLargeTeamGameModes });
 		}, interval); // In millisecs.
 	},
 
