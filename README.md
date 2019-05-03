@@ -22,7 +22,7 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 			position: 'top_center',
 			config: {
 				showScore: false,
-				userIDs: [ '9a5c894b53424137ae428ec4a8ee6f16', '3900c5958e4b4553907b2b32e86e03f8' ]
+				userIDs: [ '4735ce9132924caf8a5b17789b40f79c', '3900c5958e4b4553907b2b32e86e03f8' ]
 			}
 		},
 ```
