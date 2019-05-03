@@ -1,0 +1,12 @@
+.MMM-Fortnite td {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.MMM-Fortnite .headerrow {
+	font-weight: bold;
+}
+
+.MMM-Fortnite .statsrow {
+	color: #fff;
+}

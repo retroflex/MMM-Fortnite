@@ -1,0 +1,23 @@
+{
+	"name": "MMM-Fortnite",
+	"version": "1.0.0",
+	"description": "A MagicMirror2 module that shows Fortnite players' stats.",
+	"keywords": [
+		"magic mirror",
+		"fortnite"
+	],
+	"homepage": "https://github.com/retroflex/MMM-Fortnite#readme",
+	"bugs": {
+		"url": "https://github.com/retroflex/MMM-Fortnite/issues"
+	},
+	"license": "MIT",
+	"author": "Johan Persson",
+	"main": "MMM-Fortnite.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/retroflex/MMM-Fortnite"
+	},
+	"dependencies": {
+		"request-promise": "^4.2.4",
+	}
+}
