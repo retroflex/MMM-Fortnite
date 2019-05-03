@@ -1,5 +1,5 @@
 # MMM-Fortnite
-A [MagicMirror²](https://github.com/MichMich/MagicMirror) module that shows Fortnite players' stats (score, matches played and kills). The stats shown are from all seasons and platforms.
+A [MagicMirror²](https://github.com/MichMich/MagicMirror) module that shows Fortnite players' stats (score, matches played and kills). The stats shown are from all seasons and platforms and are sorted by score (even if score column is not shown).
 
 The stats are fetched from [this API](https://fortniteapi.com) (which seem to bit unstable at times).
 
