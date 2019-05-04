@@ -41,6 +41,16 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 | `userIDs`                     | Array of user ID's.<br />Use this URL to get the user ID from user name:<br />https://fortnite-public-api.theapinetwork.com/prod09/users/id?username=YOURUSERNAME<br />**Default value:** 4735ce9132924caf8a5b17789b40f79c (Ninja)
 
 # Customize Looks
-These items have own class names and can be customized via CSS (see [Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example).
-* Header table row
-* Stats table rows
+The following class names can be used in 'MagicMirror/config/custom.css' to customize looks (see [Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example):
+
+| CSS name                      | Description
+| ------------------------------| -----------
+| header-row                    | Header (whole row).
+| stats-row                     | The players' stats (whole rows).
+| username-header               | Username header.
+| score-header                  | Score header.
+| matches-played-header         | Matches played header.
+| kills-header                  | Kills header.
+| score                         | Score.
+| matches-played                | Number of matches played.
+| kills                         | Number of kills.
