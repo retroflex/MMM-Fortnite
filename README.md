@@ -41,7 +41,7 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 | `userIDs`                     | Array of user ID's.<br />Use this URL to get the user ID from user name:<br />https://fortnite-public-api.theapinetwork.com/prod09/users/id?username=YOURUSERNAME<br />**Default value:** 4735ce9132924caf8a5b17789b40f79c (Ninja)
 
 # Customize Looks
-The following class names can be used in 'MagicMirror/config/custom.css' to customize looks (see [Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example):
+The following class names can be used in 'MagicMirror/css/custom.css' to customize looks (see [Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example):
 
 | CSS name                      | Description
 | ------------------------------| -----------
