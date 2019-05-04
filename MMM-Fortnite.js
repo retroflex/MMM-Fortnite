@@ -67,7 +67,7 @@ Module.register('MMM-Fortnite', {
 		wrapper.className = 'bright xsmall';
 
 		let headerRow = document.createElement('tr');
-		headerRow.className = 'normal headerrow';
+		headerRow.className = 'normal header-row';
 		this.createTableCell(headerRow, this.translate('USER_NAME'), true, 'username-header', true);
 		this.createTableCell(headerRow, this.translate('SCORE'), this.config.showScore, 'score-header');
 		this.createTableCell(headerRow, this.translate('MATCHES_PLAYED'), this.config.showMatchesPlayed, 'matches-played-header');
@@ -76,7 +76,7 @@ Module.register('MMM-Fortnite', {
 
 		for (let i = 0; i < this.stats.length; ++i) {
 			let row = document.createElement('tr');
-			row.className = 'normal bright statsrow';
+			row.className = 'normal bright stats-row';
 
 			const stat = this.stats[i];
 			this.createTableCell(row, stat.username, true, 'username', true);
