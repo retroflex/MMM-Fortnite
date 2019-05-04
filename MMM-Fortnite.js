@@ -32,7 +32,7 @@ Module.register('MMM-Fortnite', {
 	// Notification from node_helper.js.
 	// The stats is received here. Then module is redrawn.
 	// @param notification - Notification type.
-	// @param payload - Contains an array of user stats. Each item in the array contains userName / score / matchesPlayed / kills.
+	// @param payload - Contains an array of user stats. Each item in the array contains username / score / matchesPlayed / kills.
 	socketNotificationReceived: function(notification, payload) {
 		if (notification === 'STATS_RESULT') {
 			if (null == payload)
@@ -60,18 +60,18 @@ Module.register('MMM-Fortnite', {
 		let wrapper = document.createElement('table');
 		if (null == this.stats) {
 			wrapper.innerHTML = this.translate('LOADING');
-			wrapper.className = 'dimmed xsmall';
+			wrapper.className = 'loading dimmed xsmall';
 			return wrapper;
 		}
-		
+
 		wrapper.className = 'bright xsmall';
 
 		let headerRow = document.createElement('tr');
 		headerRow.className = 'normal headerrow';
-		this.createTableCell(headerRow, this.translate('USER_NAME'), true, true);
-		this.createTableCell(headerRow, this.translate('SCORE'), this.config.showScore);
-		this.createTableCell(headerRow, this.translate('MATCHES_PLAYED'), this.config.showMatchesPlayed);
-		this.createTableCell(headerRow, this.translate('KILLS'), this.config.showKills);
+		this.createTableCell(headerRow, this.translate('USER_NAME'), true, 'username-header', true);
+		this.createTableCell(headerRow, this.translate('SCORE'), this.config.showScore, 'score-header');
+		this.createTableCell(headerRow, this.translate('MATCHES_PLAYED'), this.config.showMatchesPlayed, 'matches-played-header');
+		this.createTableCell(headerRow, this.translate('KILLS'), this.config.showKills, 'kills-header');
 		wrapper.appendChild(headerRow);
 
 		for (let i = 0; i < this.stats.length; ++i) {
@@ -79,10 +79,10 @@ Module.register('MMM-Fortnite', {
 			row.className = 'normal bright statsrow';
 
 			const stat = this.stats[i];
-			this.createTableCell(row, stat.userName, true, true);
-			this.createTableCell(row, stat.score, this.config.showScore);
-			this.createTableCell(row, stat.matchesPlayed, this.config.showMatchesPlayed);
-			this.createTableCell(row, stat.kills, this.config.showKills);
+			this.createTableCell(row, stat.username, true, 'username', true);
+			this.createTableCell(row, stat.score, this.config.showScore, 'score');
+			this.createTableCell(row, stat.matchesPlayed, this.config.showMatchesPlayed, 'matches-played');
+			this.createTableCell(row, stat.kills, this.config.showKills, 'kills');
 
 			wrapper.appendChild(row);
 		}
@@ -118,13 +118,14 @@ Module.register('MMM-Fortnite', {
 	// @param string - The text to show.
 	// @param show - Whether to actually show.
 	// @param leftAlign - True to left align text. False to center align.
-	createTableCell: function(row, string, show, leftAlign = false)
+	createTableCell: function(row, string, show, className, leftAlign = false)
 	{
 		if (!show)
 			return;
-		
+
 		let cell = document.createElement('td');
 		cell.innerHTML = string;
+		cell.className = className;
 		
 		if (leftAlign)
 			cell.style.cssText = 'text-align: left;';

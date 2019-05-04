@@ -53,7 +53,7 @@ module.exports = NodeHelper.create({
 			}
 		}
 
-		const stats = { userName: json.epicName,
+		const stats = { username: json.epicName,
 		                score: totalScore,
 		                matchesPlayed: totalMatchesPlayed,
 		                kills: totalKills };
@@ -61,7 +61,7 @@ module.exports = NodeHelper.create({
 	},
 
 	// Gets Fortnite user stats from API and adds them to an array.
-	// Each item in the array contains userName / score / matchesPlayed / kills.
+	// Each item in the array contains username / score / matchesPlayed / kills.
 	// The stats are the total for all seasons and all game modes.
 	// The array is then sent to the client (to MMM-Fortnite.js).
 	// @param userIDs - String array of user ID's.
