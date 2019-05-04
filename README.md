@@ -1,5 +1,5 @@
 # MMM-Fortnite
-A [MagicMirror²](https://github.com/MichMich/MagicMirror) module that shows Fortnite players' stats (score, matches played and kills). The stats shown are from all seasons and platforms and are sorted by score (even if score column is not shown).
+A [MagicMirror²](https://github.com/MichMich/MagicMirror) module that shows Fortnite players' stats (score, matches played and kills). The stats shown are from all seasons and platforms.
 
 The stats are fetched from [this API](https://fortniteapi.com) (which seem to bit unstable at times).
 
@@ -24,6 +24,7 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 			position: 'top_center',
 			config: {
 				showScore: false,
+				sortBy: 'kills',
 				userIDs: [ '4735ce9132924caf8a5b17789b40f79c', '3900c5958e4b4553907b2b32e86e03f8' ]
 			}
 		},
@@ -37,6 +38,7 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 | `includeDefaultGameModes`     | Whether to include default game modes (solo, duo, squad) in count.<br />**Default value:** true
 | `includeLimitedTimeGameModes` | Whether to include limited time game modes (e.g. blitz, snipers etc.) in count.<br />**Default value:** true
 | `includeLargeTeamGameModes`   | Whether to include large team game modes (e.g. 50 vs 50) in count.<br />**Default value:** false
+| `sortBy`                      | Which column to sort by. Possible values: 'score', 'matchesPlayed' or 'kills'.<br />**Default value:** true
 | `fetchInterval`               | How often to fetch stats (milliseconds).<br />**Default value:** 60 * 1000 (each minute)
 | `userIDs`                     | Array of user ID's.<br />Use this URL to get the user ID from user name:<br />https://fortnite-public-api.theapinetwork.com/prod09/users/id?username=YOURUSERNAME<br />**Default value:** 4735ce9132924caf8a5b17789b40f79c (Ninja)
 
