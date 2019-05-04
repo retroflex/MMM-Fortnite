@@ -14,6 +14,7 @@ Module.register('MMM-Fortnite', {
 		includeDefaultGameModes: true,
 		includeLimitedTimeGameModes: true,
 		includeLargeTeamGameModes: false,
+		sortBy: 'score',  // 'score', 'matchesPlayed' or 'kills'.
 		userIDs: [ '4735ce9132924caf8a5b17789b40f79c' ],  // Ninja.
 		fetchInterval: 60 * 1000  // In millisecs. Default each minute.
 	},
@@ -24,8 +25,8 @@ Module.register('MMM-Fortnite', {
 
 	getTranslations: function () {
 		return {
-			en: "translations/en.json",
-			sv: "translations/sv.json"
+			en: 'translations/en.json',
+			sv: 'translations/sv.json'
 		}
 	},
 
@@ -80,9 +81,9 @@ Module.register('MMM-Fortnite', {
 
 			const stat = this.stats[i];
 			this.createTableCell(row, stat.username, true, 'username', true);
-			this.createTableCell(row, stat.score, this.config.showScore, 'score');
-			this.createTableCell(row, stat.matchesPlayed, this.config.showMatchesPlayed, 'matches-played');
-			this.createTableCell(row, stat.kills, this.config.showKills, 'kills');
+			this.createNumberTableCell(row, stat.score, this.config.showScore, 'score');
+			this.createNumberTableCell(row, stat.matchesPlayed, this.config.showMatchesPlayed, 'matches-played');
+			this.createNumberTableCell(row, stat.kills, this.config.showKills, 'kills');
 
 			wrapper.appendChild(row);
 		}
@@ -97,6 +98,7 @@ Module.register('MMM-Fortnite', {
 		// Tell node_helper to load stats at startup.
 		this.sendSocketNotification('GET_STATS', { identifier: this.identifier,
 		                                           userIDs: this.config.userIDs,
+		                                           sortBy: this.config.sortBy,
 		                                           includeDefaultGameModes: this.config.includeDefaultGameModes,
 		                                           includeLimitedTimeGameModes: this.config.includeLimitedTimeGameModes,
 		                                           includeLargeTeamGameModes: this.config.includeLargeTeamGameModes });
@@ -107,6 +109,7 @@ Module.register('MMM-Fortnite', {
 		setInterval(function() {
 			self.sendSocketNotification('GET_STATS', { identifier: self.identifier,
 			                                           userIDs: self.config.userIDs,
+		                                             sortBy: self.config.sortBy,
 			                                           includeDefaultGameModes: self.config.includeDefaultGameModes,
 			                                           includeLimitedTimeGameModes: self.config.includeLimitedTimeGameModes,
 			                                           includeLargeTeamGameModes: self.config.includeLargeTeamGameModes });
@@ -115,16 +118,29 @@ Module.register('MMM-Fortnite', {
 
 	// Creates a table row cell.
 	// @param row - The table row to add cell to.
-	// @param string - The text to show.
+	// @param number - The number to show.
+	// @param show - Whether to actually show.
+	createNumberTableCell: function(row, number, show, className)
+	{
+		if (!show)
+			return;
+
+		const text = new Intl.NumberFormat().format(number);
+		this.createTableCell(row, text, show, className);
+	},
+
+	// Creates a table row cell.
+	// @param row - The table row to add cell to.
+	// @param text - The text to show.
 	// @param show - Whether to actually show.
 	// @param leftAlign - True to left align text. False to center align.
-	createTableCell: function(row, string, show, className, leftAlign = false)
+	createTableCell: function(row, text, show, className, leftAlign = false)
 	{
 		if (!show)
 			return;
 
 		let cell = document.createElement('td');
-		cell.innerHTML = string;
+		cell.innerHTML = text;
 		cell.className = className;
 		
 		if (leftAlign)

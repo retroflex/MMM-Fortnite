@@ -87,7 +87,12 @@ module.exports = NodeHelper.create({
 				stats.push(stat);
 			}
 
-			stats.sort((a, b) => Number(b.score) - Number(a.score));  // Sort users by score.
+			if ('matchesPlayed' === payload.sortBy)
+				stats.sort((a, b) => Number(b.matchesPlayed) - Number(a.matchesPlayed));
+			else if ('kills' === payload.sortBy)
+				stats.sort((a, b) => Number(b.kills) - Number(a.kills));
+			else
+				stats.sort((a, b) => Number(b.score) - Number(a.score));
 
 			this.sendSocketNotification('STATS_RESULT', {identifier: identifier, stats: stats} );
 		}).catch(err => {
