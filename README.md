@@ -38,12 +38,12 @@ The stats are fetched from [this API](https://fortniteapi.com) (which seem to bi
 | `includeDefaultGameModes`     | Whether to include default game modes (solo, duo, squad) in count.<br />**Default value:** true
 | `includeLimitedTimeGameModes` | Whether to include limited time game modes (e.g. blitz, snipers etc.) in count.<br />**Default value:** true
 | `includeLargeTeamGameModes`   | Whether to include large team game modes (e.g. 50 vs 50) in count.<br />**Default value:** false
-| `sortBy`                      | Which column to sort by. Possible values: 'score', 'matchesPlayed' or 'kills'.<br />**Default value:** true
+| `sortBy`                      | Which column to sort by. Possible values: 'score', 'matchesPlayed' or 'kills'.<br />**Default value:** score
 | `fetchInterval`               | How often to fetch stats (milliseconds).<br />**Default value:** 60 * 1000 (each minute)
 | `userIDs`                     | Array of user ID's.<br />Use this URL to get the user ID from user name:<br />https://fortnite-public-api.theapinetwork.com/prod09/users/id?username=YOURUSERNAME<br />**Default value:** 4735ce9132924caf8a5b17789b40f79c (Ninja)
 
 # Customize Looks
-The following class names can be used in 'MagicMirror/css/custom.css' to customize looks (see [Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example):
+The following class names can be used in 'MagicMirror/css/custom.css' to customize looks (see [MMM-Fortnite.css](https://github.com/retroflex/MMM-Fortnite/blob/master/MMM-Fortnite.css) for example):
 
 | CSS name                      | Description
 | ------------------------------| -----------
